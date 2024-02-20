@@ -49,7 +49,7 @@ df[(df['UserId'] == 7256) & (df['Hizmet'] == '46_4')]  # Mükerrer mi?
 # UserID ve yeni oluşturduğunuz date değişkenini "_" ile birleştirirek ID adında yeni bir değişkene atayınız.
 df.info()
 df['CreateDate'] = pd.to_datetime(df['CreateDate'])
-df['New_Date'] = [str(year) + '-' + str(month) for year, month in
+df['New_Date'] = [str(year) + '_' + str(month) for year, month in
                   zip(df['CreateDate'].dt.year, df['CreateDate'].dt.month)]
 
 df['SepetId'] = df['UserId'].astype(str) + '_' + df['New_Date']
@@ -57,7 +57,7 @@ df['SepetId'] = df['UserId'].astype(str) + '_' + df['New_Date']
 # Pivot_Table oluşturunuz
 # Önemli, MultiIndex'li sütunlar olmaması için sadece ilgili sütunları data'ya gönder
 df_pivot_table = pd.pivot_table(data = df[['SepetId', 'Hizmet']], index = 'SepetId', columns = 'Hizmet',
-                                aggfunc = lambda x: True, fill_value = False)
+                                aggfunc = lambda x: 1, fill_value = 0)
 
 
 def create_rules(arl_matrix, min_sp = 0.001, measurement = 'lift', min_th = 1):
@@ -82,7 +82,7 @@ ass_rules = create_rules(df_pivot_table)
 arl_recommender(ass_rules, '2_0', recomment_count = 10)
 
 # arl_recommender fonksiyonunu kullanarak en son 2_0 hizmetini alan bir kullanıcıya hizmet önerisinde bulununuz:
-date = df['CreateDate'].max()
+
 user_id = df[(df['Hizmet'] == '2_0') &
              (df['CreateDate'] == (df[df['Hizmet'] == '2_0']['CreateDate'].max()))]['UserId'].iloc[0]
 
