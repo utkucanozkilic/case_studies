@@ -21,7 +21,7 @@ rating = rating[~rating['title'].isin(out_of_calc_films)]
 
 # Alternatif:
 out_of_calc_films = pd.DataFrame(rating['title'].value_counts())
-out_of_calc_films = out_of_calc_films[out_of_calc_films['count'] < 1001].index
+out_of_calc_films = out_of_calc_films[out_of_calc_films['title'] < 1001].index
 common_films = rating[~rating['title'].isin(out_of_calc_films)]
 
 # index'te userID'lerin sutunlarda film isimlerinin ve değer olarak ratinglerin bulunduğu

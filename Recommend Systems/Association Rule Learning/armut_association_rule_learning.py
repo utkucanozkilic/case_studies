@@ -57,7 +57,7 @@ df['SepetId'] = df['UserId'].astype(str) + '_' + df['New_Date']
 # Pivot_Table oluşturunuz
 # Önemli, MultiIndex'li sütunlar olmaması için sadece ilgili sütunları data'ya gönder
 df_pivot_table = pd.pivot_table(data = df[['SepetId', 'Hizmet']], index = 'SepetId', columns = 'Hizmet',
-                                aggfunc = lambda x: 1, fill_value = 0)
+                                aggfunc = lambda x: True, fill_value = False)
 
 
 def create_rules(arl_matrix, min_sp = 0.001, measurement = 'lift', min_th = 1):
