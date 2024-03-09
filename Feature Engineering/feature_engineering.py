@@ -260,12 +260,16 @@ accuracy_score(y_pred, y_test)
 
 
 # Değişkenlerin model başarısındaki etkisi:
-def plot_importance(model, features, num=len(X), save=False):
+def plot_importance(model, features, num = len(X), save = False):
     feature_imp = pd.DataFrame({'Value': model.feature_importances_, 'Feature': features.columns})
-    plt.figure(figsize=(20, 5))
-    sns.set(font_scale=1)
-    sns.barplot(x="Value", y="Feature", data=feature_imp.sort_values(by="Value",
-                                                                      ascending=False)[0:num])
+    plt.figure(figsize = (20, 5))
+    sns.set(font_scale = 1)
+    sns.barplot(
+        x = "Value", y = "Feature", data = feature_imp.sort_values(
+            by = "Value",
+            ascending = False
+            )[0: num]
+        )
     plt.title('Features')
     plt.tight_layout()
     plt.show()
